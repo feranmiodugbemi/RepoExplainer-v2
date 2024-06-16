@@ -117,20 +117,25 @@
               Available
             </span>
           </div>
-          <div class="flex items-center justify-between">
+          <div class="relative">
             <div class="grid gap-1">
-              <h3 class="text-lg font-bold text-blue-900 dark:text-blue-400">Issue Summarization</h3>
+              <h3 class="text-lg font-bold text-blue-900 dark:text-blue-400">Code Generation</h3>
               <p class="text-sm text-gray-500 dark:text-gray-400">
-                Get concise summaries of GitHub issues to quickly understand the problem and proposed solutions.
+                Generates code on how to use a complex library/sdk with little to no docs.
               </p>
             </div>
-            <span class="bg-yellow-200 text-yellow-800 px-2 py-1 text-xs font-semibold rounded-md">Coming Soon</span>
+            <span class="absolute top-0 right-0 bg-green-200 text-green-800 px-2 py-1 text-xs font-semibold rounded-md flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Available
+            </span>
           </div>
           <div class="flex items-center justify-between">
             <div class="grid gap-1">
-              <h3 class="text-lg font-bold text-blue-900 dark:text-blue-400">Issue Summarization</h3>
+              <h3 class="text-lg font-bold text-blue-900 dark:text-blue-400">Commit explanation</h3>
               <p class="text-sm text-gray-500 dark:text-gray-400">
-                Get concise summaries of GitHub issues to quickly understand the problem and proposed solutions.
+                Understand the context and purpose of code changes by having commit messages explained.
               </p>
             </div>
             <span class="bg-yellow-200 text-yellow-800 px-2 py-1 text-xs font-semibold rounded-md">Coming Soon</span>
