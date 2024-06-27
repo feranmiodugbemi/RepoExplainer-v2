@@ -182,7 +182,7 @@
                 <h3 class="text-xl font-bold text-blue-900 dark:text-blue-400">Feranmi Odugbemi</h3>
                 <p class="text-gray-500 dark:text-gray-400">Backend and AI Engineer</p>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Feranmi is a skilled Enigeer, Blah Blah
+                  Feranmi is a skilled Engineer, Blah Blah
                   Blud na demi god sha
                 </p>
               </div>
@@ -194,15 +194,16 @@
   </main>
   <footer class="bg-gray-100 p-6 md:py-12 w-full dark:bg-gray-800">
     <div class="container max-w-7xl flex items-center justify-between">
-      <p class="text-sm text-gray-500 dark:text-gray-400">Built with love by Feranmi</p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Built with love by <a class="text-sm hover:underline underline-offset-4" href="https://www.twitter.com/FeranmiOdugbemi/" target="_blank" rel="noopener noreferrer">
+        Feranmi
+      </a>, Inspiration from <a class="text-sm hover:underline underline-offset-4" href="https://www.github.com/cmoorelabs" target="_blank" rel="noopener noreferrer">
+        Cmooredev
+      </a></p>
       <div class="flex flex-col gap-4">
         <div class="flex items-center gap-2">
           <span class="text-sm text-gray-500">Powered by</span>
           <a class="text-sm hover:underline underline-offset-4" href="https://www.langchain.com/" target="_blank" rel="noopener noreferrer">
             Langchain
-          </a>
-          <a class="text-sm hover:underline underline-offset-4" href="https://www.deeplake.ai/" target="_blank" rel="noopener noreferrer">
-            Deeplake
           </a>
           <a class="text-sm hover:underline underline-offset-4" href="https://www.openai.com/" target="_blank" rel="noopener noreferrer">
             OpenAI
