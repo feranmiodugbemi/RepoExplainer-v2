@@ -12,8 +12,16 @@ from file_processing import clone_github_repo, load_and_index_files
 from questions import ask_question, QuestionContext
 import time
 import uuid
+from slowapi.errors import RateLimitExceeded
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address, Request
 
+
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 
 # Use API key for simple "authentication"
 API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
@@ -22,7 +30,7 @@ API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
 user_sessions = {}
 
 # Session timeout (in seconds)
-SESSION_TIMEOUT = 3600  # 1 hour
+SESSION_TIMEOUT = 1200  # 20 mins
 
 class Repository(BaseModel):
     github_url: str
@@ -78,7 +86,8 @@ def clean_expired_sessions():
         del user_sessions[key]
 
 @app.post("/repository")
-async def set_repository(repo: Repository, current_user: str = Depends(get_current_user)):
+@limiter.limit("100/minute")
+async def set_repository(repo: Repository, request: Request, current_user: str = Depends(get_current_user)):
     clean_expired_sessions()
     github_url = repo.github_url
     openai_key = str(repo.openai_api_key)
@@ -102,7 +111,8 @@ async def set_repository(repo: Repository, current_user: str = Depends(get_curre
             raise HTTPException(status_code=400, detail="Failed to clone the repository")
 
 @app.post("/question")
-async def ask_repository_question(question: Question, current_user: str = Depends(get_current_user)):
+@limiter.limit("500/minute")
+async def ask_repository_question(question: Question, request: Request, current_user: str = Depends(get_current_user)):
     clean_expired_sessions()
     if current_user not in user_sessions or user_sessions[current_user] is None:
         raise HTTPException(status_code=400, detail="Repository not set. Please set a repository first.")
