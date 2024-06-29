@@ -23,7 +23,7 @@
       <span class="text-xl font-bold">RepoExplainer</span>
     </a>
     <nav class="ml-auto flex gap-4 sm:gap-6">
-      <a class="text-sm font-medium hover:underline underline-offset-4" href="/">
+      <a class="text-sm font-medium hover:underline underline-offset-4" href="https://www.github.com/RepoExplainer-v2" target="_blank" rel="noopener noreferrer">
         Star us on Github🖤
       </a>
     </nav>
@@ -45,7 +45,7 @@
             <div class="flex flex-col gap-2 min-[400px]:flex-row">
               <a
                 class="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-blue-400 dark:text-gray-900 dark:hover:bg-blue-400/90 dark:focus-visible:ring-blue-300"
-                href="#"
+                href="/credentials"
               >
                 Try it Now
               </a>
