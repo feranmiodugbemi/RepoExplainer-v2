@@ -23,7 +23,7 @@
       <span class="text-xl font-bold">RepoExplainer</span>
     </a>
     <nav class="ml-auto flex gap-4 sm:gap-6">
-      <a class="text-sm font-medium hover:underline underline-offset-4" href="https://www.github.com/RepoExplainer-v2" target="_blank" rel="noopener noreferrer">
+      <a class="text-sm font-medium hover:underline underline-offset-4" href="https://www.github.com/feranmiodugbemi/RepoExplainer-v2" target="_blank" rel="noopener noreferrer">
         Star us on Github🖤
       </a>
     </nav>

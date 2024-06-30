@@ -1,5 +1,6 @@
 <script>
     import human from "$lib/assets/human.png"
+    export let humancontent;
 </script>
 
 
@@ -11,8 +12,7 @@
       <div class="font-bold">You</div>
       <div class="prose prose-stone">
         <p>
-          Can you explain airplane turbulence to someone who has never flown before? Make it conversational
-          and concise.
+          {humancontent}
         </p>
       </div>
     </div>
