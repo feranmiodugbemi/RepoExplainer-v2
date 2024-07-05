@@ -2,8 +2,9 @@
   import Bot from "$lib/components/bot.svelte";
   import Human from "$lib/components/human.svelte";
   import Errorcomponent from "$lib/components/errorcomponent.svelte";
+  import {BACKEND_API} from "$lib/index";
+  import { authToken } from "$lib/stores/auth";
   let question = "";
-  let answer = "";
   let errorMessage = "";
   let components = [
     {
@@ -30,10 +31,15 @@
     question = "";
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/question`, {
+      let token;
+      authToken.subscribe(value => {
+        token = value;
+      });
+      const response = await fetch(`${BACKEND_API}/question`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-API-Key": token,
         },
         body: JSON.stringify({ question: currentQuestion }),
       });
