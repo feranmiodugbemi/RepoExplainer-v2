@@ -4,15 +4,20 @@
   import { goto } from "$app/navigation";
   import Errorcomponent from "$lib/components/errorcomponent.svelte";
   import Successcomponent from "$lib/components/successcomponent.svelte";
-
+  import Loader from "$lib/components/loader.svelte"
+  import { onMount } from "svelte";
+  onMount(() => {
+    authToken.set(null);  // or authToken.set('') if you prefer an empty string
+  });
   let apiKey = "";
   let repoLink = "";
   let errorMessage = "";
   let showSuccess = false;
   let countdown = 3;
-
+  let showModal = false;
   async function submitCredentials() {
     try {
+      showModal = true;
       const response = await fetch(`${BACKEND_API}/repository`, {
         method: "POST",
         headers: {
@@ -26,6 +31,7 @@
         const data = await response.json();
         if (data.api_key) {
           showSuccess = true;
+          showModal = false;
           authToken.set(data.api_key);
 
           const interval = setInterval(() => {
@@ -39,6 +45,7 @@
           throw new Error("API key not found in response");
         }
       } else {
+        showModal = false;
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
@@ -47,7 +54,9 @@
     }
   }
 </script>
-
+{#if showModal}
+   <Loader/>
+{/if}
 <div class="flex flex-col min-h-[100dvh] dark:bg-gray-900 dark:text-gray-50">
   <div class="flex-1 flex flex-col">
     <header

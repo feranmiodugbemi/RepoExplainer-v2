@@ -4,12 +4,25 @@
   import Errorcomponent from "$lib/components/errorcomponent.svelte";
   import {BACKEND_API} from "$lib/index";
   import { authToken } from "$lib/stores/auth";
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+  onMount(() => {
+  const unsubscribe = authToken.subscribe(token => {
+    if (!token) {
+      goto('/credentials');
+    }
+  });
+
+  // Clean up the subscription when the component is destroyed
+  return unsubscribe;
+  });
+
   let question = "";
   let errorMessage = "";
   let components = [
     {
       type: Bot,
-      props: { aicontent: "Hello, how are you doing?", isError: false },
+      props: { aicontent: "Hello, RepoExplainer Here, ask your questions about your github repository", isError: false },
     },
   ];
 

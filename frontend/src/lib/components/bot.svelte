@@ -30,7 +30,7 @@
           {aicontent}
         </p>
         {:else}
-        <p>
+        <p class="text-green-500">
           {aicontent}
         </p>
         {/if}
