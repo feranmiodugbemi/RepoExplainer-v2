@@ -4,10 +4,10 @@
   import { goto } from "$app/navigation";
   import Errorcomponent from "$lib/components/errorcomponent.svelte";
   import Successcomponent from "$lib/components/successcomponent.svelte";
-  import Loader from "$lib/components/loader.svelte"
+  import Loader from "$lib/components/loader.svelte";
   import { onMount } from "svelte";
   onMount(() => {
-    authToken.set(null);  // or authToken.set('') if you prefer an empty string
+    authToken.set(null); // or authToken.set('') if you prefer an empty string
   });
   let apiKey = "";
   let repoLink = "";
@@ -18,6 +18,8 @@
   async function submitCredentials() {
     try {
       showModal = true;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 seconds timeout
       const response = await fetch(`${BACKEND_API}/repository`, {
         method: "POST",
         headers: {
@@ -25,7 +27,10 @@
           "X-API-Key": X_API_ACCESS_HEADER,
         },
         body: JSON.stringify({ github_url: repoLink, openai_api_key: apiKey }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
@@ -50,12 +55,17 @@
       }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
-      errorMessage = `An error occurred: ${error.message}`;
+      if (error.name === "AbortError") {
+        errorMessage = "Request timed out after 10 seconds. Please try again.";
+      } else {
+        errorMessage = `An error occurred: ${error.message}`;
+      }
     }
   }
 </script>
+
 {#if showModal}
-   <Loader/>
+  <Loader />
 {/if}
 <div class="flex flex-col min-h-[100dvh] dark:bg-gray-900 dark:text-gray-50">
   <div class="flex-1 flex flex-col">
