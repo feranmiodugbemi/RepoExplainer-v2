@@ -19,7 +19,7 @@
     try {
       showModal = true;
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 seconds timeout
+      const timeoutId = setTimeout(() => controller.abort(), 20000); // 10 seconds timeout
       const response = await fetch(`${BACKEND_API}/repository`, {
         method: "POST",
         headers: {
@@ -56,8 +56,10 @@
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
       if (error.name === "AbortError") {
+        showModal = false;
         errorMessage = "Request timed out after 10 seconds. Please try again.";
       } else {
+        showModal = false;
         errorMessage = `An error occurred: ${error.message}`;
       }
     }
